@@ -151,15 +151,11 @@ class Agent:
     def train(self):
         self.gen_frames = 0
         ####################### EVOLUTION #####################
-
-        # NeuroEvolution's probabilistic selection and recombination step
         t1 = time.time()
         #for _ in range(self.randomWalkTimes):
         #    self.randomWalk()
         best_train_fitness = max(self.all_fitness)
-
         new_pop = self.evolver.epoch(self.pop, self.all_fitness)
-        # print("new_pop_num:", len(new_pop))
         new_pop_fitness = []
         for net in new_pop:
             fitness, _ = self.evaluate(net)
@@ -167,14 +163,9 @@ class Agent:
         self.pop, self.all_fitness = self.get_offspring(self.pop, self.all_fitness, new_pop, new_pop_fitness)
         t2 = time.time()
         print("epoch finished.    cost time:", t2 - t1)
-
         fitness_best, _ = self.evaluate(self.pop[0], True)
-        #print("fitness[in]:", fitness_best)
-
         ####################### RL Learning #####################
-        # rl learning step
         t1 = time.time()
-        
         for _ in range(self.learningTimes):
             # worst_index = self.all_fitness.index(min(self.all_fitness))
             index = random.randint(len(self.pop) // 2, len(self.pop) - 1)
@@ -182,24 +173,13 @@ class Agent:
             if len(self.replay_buffer) > self.batch_size * 2:
                 transitions = self.replay_buffer.sample(self.batch_size)
                 batch = replay_memory.Transition(*zip(*transitions))
-                
-                
-                
-                
-                self.update_parameters(batch)
-                
+                self.update_parameters(batch) 
                 fitness, _ = self.evaluate(self.rl_agent, True) 
-                
-                
                 if fitness_best < fitness:
-                  #print("fitness[out]:", fitness)
                   self.rl_to_evo(self.rl_agent, self.pop[index])
-                  
-                  self.all_fitness[index] = fitness
-                
+                  self.all_fitness[index] = fitness         
         t2 = time.time()
         print("learning finished.    cost time:", t2 - t1)
-        # self.scheduler.step()
         return best_train_fitness, sum(self.all_fitness) / len(self.all_fitness), self.rl_agent, self.pop[
                                                                                                  0:len(self.pop) // 10]
 
