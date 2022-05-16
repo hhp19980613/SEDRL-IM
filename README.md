@@ -1,2 +1,2 @@
 # SEDRL-IM
-Codessssssssssss of Influence Maximization Research in Signed Networks by Using Evolutionary Deep Reinforcement Learning
+Code of Influence Maximization Research in Signed Networks by Using Evolutionary Deep Reinforcement Learning
