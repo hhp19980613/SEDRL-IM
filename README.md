@@ -1,7 +1,7 @@
 # SEDRL-IM
-## 一 代码说明
+## 一 代码所属论文说明
 Code of Influence Maximization Research in Signed Networks by Using Evolutionary Deep Reinforcement Learning
-## python 环境
+## 二 python 环境说明
 1）环境配置文件：environment.yml <br>
 2）重要环境 <br>
   python                    3.7.0 <br>
@@ -10,22 +10,22 @@ Code of Influence Maximization Research in Signed Networks by Using Evolutionary
   tensorflow                1.14.0 <br>
   torch                     1.8.1+cu111 <br>
   networkx                  2.5.1 <br>
- ## 二 代码说明
- ### 2.1 代码文件总览
+ ## 三 代码说明
+ ### 3.1 代码文件总览
  1）Mod_Utils.py 工具函数<br> 
  2）DQN_Model.py DQN 网络模型<br>
  3）Replay_Memory.py 缓存池及存取函数<br>
  4）Evolutionary_Algorithm.py 演化算法相关函数<br>
  5）Influence_Propagation.py 影响传播函数<br>
  6）Run_SEDRL_IM.py 训练及求解函数<br>
- ### 2.2 运行代码指令
+ ### 3.2 运行代码指令
  python Run_SEDRL_IM.py
- ### 2.3 函数功能
- #### 2.3.1 Mod_Utils.py
+ ### 3.3 函数功能
+ #### 3.3.1 Mod_Utils.py
  矩阵处理函数
- #### 2.3.2 DQN_Model.py
+ #### 3.3.2 DQN_Model.py
  DQN网络的数据结构，采用两层神经网络作为DQN网络
- #### 2.3.3 Replay_Memory.py
+ #### 3.3.3 Replay_Memory.py
  缓存池的数据结构
  ##### 1) def push
  在容量未满的情况下存入四元组数据，如果容量超过上限，则覆盖之前的数据
@@ -33,7 +33,7 @@ Code of Influence Maximization Research in Signed Networks by Using Evolutionary
  以特定批次大小采用经验数据
  ##### 3) def __len__
  返回当前容量
- #### 2.3.4 Evolutionary_Algorithm.py
+ #### 3.3.4 Evolutionary_Algorithm.py
  ##### 1) def selection_tournament
  基于三个为一组的竞标赛规则选出适应值较大的DQN种群作为优异种群
  ##### 2) def list_argsort
@@ -50,7 +50,7 @@ Code of Influence Maximization Research in Signed Networks by Using Evolutionary
  基于适应值和竞标赛规则划分优异种群与非优异种群，并对优异种群进行交叉操作，对非优异种群进行变异操作
  ##### 8) def unsqueeze
  重构数组维数，工具函数
- #### 2.3.5 Influence_Propagation.py
+ #### 3.3.5 Influence_Propagation.py
  ##### 1) def constrctGraph
  基于邻接表构造邻接矩阵
  ##### 2) def nextGraph
@@ -71,7 +71,7 @@ Code of Influence Maximization Research in Signed Networks by Using Evolutionary
  计算种子节点两跳以内激活其他种子节点影响分数
  ##### 10) def getEpsilon
  计算种子节点一跳以内激活其他种子节点影响分数
- #### 2.3.6 Run_SEDRL_IM.py
+ #### 3.3.6 Run_SEDRL_IM.py
  ##### 1) def add_experience
  基于CUDA技术将训练四元组数据存进缓存池
  ##### 2) def evaluate
