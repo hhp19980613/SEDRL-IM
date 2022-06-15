@@ -100,13 +100,7 @@ class Env:
         degreeList = degreeList.reshape((self.nodeNum, 1))
         posi_degreeList = posi_degreeList.reshape((self.nodeNum, 1))
         
-        self.max_out_degree = np.max(degreeList)
-        for i in range(self.nodeNum):
-            degreeList[i] = degreeList[i] / self.max_out_degree * 1.0
-            
-        self.max_out_posi_degree = np.max(posi_degreeList)
-        for i in range(self.nodeNum):
-            posi_degreeList[i] = posi_degreeList[i] / self.max_out_posi_degree * 1.0
+        
 
         input = np.hstack((degreeList, input))
         input = np.hstack((posi_degreeList, input))
